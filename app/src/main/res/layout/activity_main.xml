@@ -23,4 +23,7 @@
         android:src="@drawable/baseline_plus_one_24"
         android:id="@+id/add_note_btn" />
 
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

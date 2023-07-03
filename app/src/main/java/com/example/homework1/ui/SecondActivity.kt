@@ -18,7 +18,6 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
     private val viewModel by lazy { ViewModelProvider(this)[ActivityViewModel::class.java] }
 
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,6 @@ class SecondActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             val title = binding.editText.text.toString().trim()
             if (title.isNotEmpty()) {
-                viewModel.addTask(title)
                 val  result = Intent()
                 result.putExtra("title", title)
                 setResult(Activity.RESULT_OK, result)

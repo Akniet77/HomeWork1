@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.homework1.databinding.ItemActivityBinding
 import com.example.homework1.model.Task
 
-class ActivityAdapter(private var tasks: MutableList<Task>,
+
+class ActivityAdapter(private var tasks: List<Task>,
                       private val onCompleteTask: (Int) -> Unit,
                       private val onDeleteTask: (Int) -> Unit
 ): RecyclerView.Adapter<ActivityAdapter.ViewHolder>(){
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: MutableList<Task>) {
+    fun setList(list: List<Task>) {
         this.tasks = list
         notifyDataSetChanged()
     }
@@ -28,7 +29,7 @@ class ActivityAdapter(private var tasks: MutableList<Task>,
 
     override fun getItemCount() = tasks.size
 
-    inner class ViewHolder(private val binding : ItemActivityBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding : ItemActivityBinding) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(task: Task) {
             binding.title.text = task.title
             binding.checkboxCompleted.isChecked = task.isCompleted
@@ -36,6 +37,11 @@ class ActivityAdapter(private var tasks: MutableList<Task>,
             binding.checkboxCompleted.setOnCheckedChangeListener { _, isChecked ->
                 if (adapterPosition != RecyclerView.NO_POSITION && isChecked) {
                     onCompleteTask(adapterPosition)
+                }
+                binding.btnDelete.setOnClickListener {
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        onDeleteTask(adapterPosition)
+                    }
                 }
             }
         }

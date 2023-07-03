@@ -9,6 +9,9 @@ class ActivityViewModel : ViewModel() {
     private val _tasks = MutableLiveData<MutableList<Task>>()
     val tasks: LiveData<MutableList<Task>> = _tasks
 
+    init {
+        _tasks.value = mutableListOf()
+    }
 
     fun addTask(title: String) {
         _tasks.value?.add(Task(title))
